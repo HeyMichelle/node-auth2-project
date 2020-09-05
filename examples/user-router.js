@@ -1,11 +1,11 @@
 const express = require("express");
 const userModel = require("../models/user-model");
-const userMiddleware = require("../middleware/user-middleware");
+const { restrict } = require("../middleware/restrict");
 const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
-router.get("/users", userMiddleware.restrict(), async (req, res, next) => {
+router.get("/users", restrict(), async (req, res, next) => {
   try {
     res.json(await userModel.find());
   } catch (err) {
@@ -70,7 +70,7 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
-router.get("/logout", userMiddleware.restrict(), async (req, res, next) => {
+router.get("/logout", restrict(), async (req, res, next) => {
   try {
     req.session.destroy((err) => {
       if (err) {

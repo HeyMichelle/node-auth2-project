@@ -24,7 +24,6 @@ server.use(session({
 	}) // stores cookie sessions to database to persist vs just being in memory
 }))
 
-server.use('/api/', userRouter);
 
 server.use((err, req, res, next) => {
 	console.log(err)
