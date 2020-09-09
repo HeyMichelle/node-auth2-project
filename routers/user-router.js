@@ -61,8 +61,11 @@ router.post("/login", async (req, res, next) => {
 		// generate a new JSON web token
 		const token = jwt.sign({
 			userID: user.id,
-			userRole: "admin", // this value would normally come from the database
+			// userRole: "admin", // this value would normally come from the database
+			// only put in things that will never change, typically only want to put the user ID
 		}, process.env.JWT_SECRET)
+
+		// in bw: instead of token as cookie, send it back as part of the body, to give access to JS. Make a JWT and send in body
 
 		// send the token back as a cookie
 		res.cookie("token", token)
